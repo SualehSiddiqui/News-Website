@@ -1,16 +1,19 @@
 const mainDiv = document.getElementById("main-div")
+let loader = document.getElementById("loader");
 // console.log("hello")
 let getNews = (topic) => {
     fetch(`https://gnews.io/api/v4/search?q=${topic}&apikey=8123aac2c529560fcf10f65a50226fe2`)
         .then(res => res.json())
         .then(res => {
-            console.log(res);
+            // console.log(res);
+            loader.style.display = "none";
+            mainDiv.innerHTML = "";
             const articles = res.articles;
             for (var i = 0; i < articles.length; i++) {
                 let { publishedAt, url, image, title, content, source } = articles[i]
                 if (image) {
-                    console.log()
-                    console.log(articles[i]);
+                    // console.log()
+                    // console.log(articles[i]);
                     mainDiv.innerHTML += `
                     <a href="${url}" class="news-link">
                         <div class="news-div">
@@ -48,6 +51,7 @@ let searchBar = document.getElementById("search-bar");
 
 let search = () => {
     if (searchBar.value.trim()) {
+        loader.style.display = "flex";
         mainDiv.innerHTML = "";
         getNews(searchBar.value);
     } else {
@@ -61,6 +65,7 @@ let search = () => {
 }
 
 let filter = topic => {
+    loader.style.display = "flex";
     mainDiv.innerHTML = "";
     getNews(topic);
 }

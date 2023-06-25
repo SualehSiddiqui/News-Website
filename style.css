@@ -8,8 +8,21 @@
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
+.header-items{
+    display: flex !important;
+    flex-direction: column !important;
+}
+
 .logo-img {
     width: 50px;
+}
+
+.search-bar-div{
+    width: 50%;
+}
+
+.search{
+    width: 90%;
 }
 
 .search:focus {
@@ -35,7 +48,6 @@
     width: 300px;
     height: 400px;
     overflow-y: hidden;
-    /* height:auto; */
     background-color: #F5F5F5;
     border-radius: 10px;
     display: flex;
@@ -104,4 +116,11 @@
     opacity: 0.6;
     right: 8px;
     bottom: 0px;
+}
+
+.loader{
+    position: absolute !important;
+    right: 50%;
+    top: 50%;
+    z-index: 1;
 }
