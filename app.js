@@ -1,32 +1,35 @@
 const mainDiv = document.getElementById("main-div")
-let getNews = () =>
-    fetch("https://newsapi.org/v2/everything?q=politics&from=2023-05-24&sortBy=publishedAt&apiKey=2190fc732d284db18dcbb8347a3a1799")
+// console.log("hello")
+let getNews = (topic) => {
+    fetch(`https://gnews.io/api/v4/search?q=${topic}&apikey=8123aac2c529560fcf10f65a50226fe2`)
         .then(res => res.json())
         .then(res => {
+            console.log(res);
             const articles = res.articles;
             for (var i = 0; i < articles.length; i++) {
-                console.log(articles[i].urlToImage);
-            // let { publishedAt, urlToImage, title, content, author} = articles[i]
-                if (articles[i].urlToImage) {
+                let { publishedAt, url, image, title, content, source } = articles[i]
+                if (image) {
+                    console.log()
+                    console.log(articles[i]);
                     mainDiv.innerHTML += `
-                    <a href="" class="news-link">
+                    <a href="${url}" class="news-link">
                         <div class="news-div">
                             <div class="image-div">
                                 <div class="time-div">
                                   <i class="fa-solid fa-clock"></i>
-                                  ${moment(articles[i].publishedAt.slice(0, 10), "YYYY-MM-DD").fromNow()}
+                                  ${moment(publishedAt.slice(0, 10), "YYYY-MM-DD").fromNow()}
                                 </div>
-                                <img src="${articles[i].urlToImage}" alt="" class="news-image">
+                                <img src="${image}" alt="" class="news-image">
                             </div>
                             <div class="news">
                                <h5 class="news-title">
-                                    ${articles[i].title.slice(0, 30)}...
+                                    ${title.slice(0, 30)}...
                                </h5>
                                  <div class="hr-line"></div>
-                                    <p>${articles[i].content.slice(0, 150)}....</p>
+                                    <p>${content.slice(0, 150)}....</p>
                             </div>
                             <div class="author-div">
-                                <span class="">${articles[i].author ? articles[i].author.split(" ").slice(0, 2).join(" ") : "Sualeh"}</span>
+                                <span class="">${source.name ? source.name : "Sualeh"}</span>
                             </div>
                         </div>
                     </a>
@@ -37,9 +40,27 @@ let getNews = () =>
 
         })
         .catch(err => console.log(err));
+}
 
+getNews("World Wide");
 
-//    Title
-//   Content
-//   Author
-// 
+let searchBar = document.getElementById("search-bar");
+
+let search = () => {
+    if (searchBar.value.trim()) {
+        mainDiv.innerHTML = "";
+        getNews(searchBar.value);
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please type something',
+            // footer: '<a href="">Why do I have this issue?</a>'
+          })
+    }
+}
+
+let filter = topic => {
+    mainDiv.innerHTML = "";
+    getNews(topic);
+}
