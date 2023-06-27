@@ -22,13 +22,7 @@
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse header-items" id="navbarSupportedContent">
-                <div class="d-flex search-bar-div" role="search">
-                    <input class="form-control me-2 search" type="search" placeholder="Search" aria-label="Search"
-                        id="search-bar">
-                    <button class="btn btn-outline-success search-btn" type="submit" onclick="search()">Search</button>
-                </div>
-                <div class="">
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-auto me-auto">
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="index.html">Home</a>
@@ -55,22 +49,30 @@
                             <a class="nav-link" href="#" onclick="filter('Science')">Science</a>
                         </li>
                     </ul>
-
+                <div class="d-flex search-bar-div" role="search">
+                    <input class="form-control me-2 search" type="search" placeholder="Search" aria-label="Search"
+                        id="search-bar">
+                    <button class="btn btn-outline-success search-btn" type="submit" onclick="search()">Search</button>
                 </div>
-                
+
 
             </div>
         </div>
     </nav>
-    <div class="spinner-border text-secondary loader" id="loader" role="status">
+    <!-- <div class="spinner-border text-secondary " role="status">
         <span class="sr-only"></span>
-    </div>
+    </div> -->
     
     <div class="container main-div d-flex flex-wrap justify-content-center mt-4" id="main-div">
     </div>
-
-
     
+    <div class="loader buffering"  id="loader">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+
+
     <script src="app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"
